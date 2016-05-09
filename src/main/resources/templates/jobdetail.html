@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Job</title>
+    <sec:csrfMetaTags/>
+    
+</head>
+<body>
+    <nav role="navigation">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/job">Jobs</a></li>
+        </ul>
+    </nav>    
+       <div>
+		     <p th:inline="text">Job Title: [[${job.jobTitle}]]</p>
+		     <p th:inline="text">Job Description: [[${job.jobDesc}]]</p>
+		     <p th:inline="text">Number of people to hire: [[${job.numberPeopleToHire}]]</p>
+		     <p th:inline="text">Last Application Date: [[${job.lastApplicationDate}]]</p>
+        </div>
+
+    <div> 
+		<strong>Application Form</strong>
+        <form enctype="multipart/form-data" th:action="@{/job/} + ${job.id}" th:object="${form}" th:method="post">
+            <table> 
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" th:field="*{name}"/></td>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</td>
+            </tr>
+            <tr>
+                <td><label>Email:</label></td>
+                <td><input type="text"  th:field="*{email}"/></td>
+                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email error</td>
+            </tr>
+            <tr>
+                <td><label>Phone:</label></td>
+                <td><input type="text" th:field="*{phone}" /></td>
+                <td th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">phone error</td>
+            </tr>
+            <tr>
+                <td><label>Address:</label></td>
+                <td><input type="text" th:field="*{address}"/></td>
+                <td th:if="${#fields.hasErrors('address')}" th:errors="*{address}">address error</td>
+            </tr>
+            <tr>
+                <td><label>Thoughts:</label></td>
+		 		<td><textarea rows="4" cols="50" th:field="*{thoughts}"></textarea> </td>
+          		<td th:if="${#fields.hasErrors('thoughts')}" th:errors="*{thoughts}">thoughts error</td>
+            </tr>
+            <tr>
+                <td><label>Resume:</label></td>
+		 		<td><input type="file" th:field="*{file}" /></td>
+            </tr>
+			<tr>
+            <td><input type="submit" value="Submit" name="apply" /> <input type="reset" value="Reset" /></td>
+            <td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /></td>
+            </tr>
+			</table>
+        </form>
+    </div>
+</body>
+</html>

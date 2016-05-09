@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Home</title>
+</head>
+<body>
+	    <div>
+	    	<ul>
+	    		<li><a href="/">Home</a></li>
+        		<li><a href="/job">Jobs</a></li>
+        		<li sec:authorize="isAuthenticated()"><a href="/application">Application List</a></li>      
+        		<li sec:authorize="isAnonymous()"><a href="/login">Login</a></li>
+        		<li sec:authorize="isAuthenticated()"><a href="/logout">Logout</a></li>
+      		</ul>
+    	</div>
+</body>
+</html>

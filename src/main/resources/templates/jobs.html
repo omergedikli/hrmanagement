@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Jobs</title>
+</head>
+<body>
+<nav role="navigation">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/job/">Jobs</a></li>
+        <li><a href="/job/add">Add Job</a></li>
+    </ul>
+</nav>
+ 
+<table>
+    <tr>
+        <th style="background-color:lightblue;">Job Title</th>
+        <th style="background-color:coral;">Job Description</th>
+        <th style="background-color:darkorange;">Number of People to Hire</th>
+        <th style="background-color:greenyellow;">Last Application Date</th>
+        <th style="background-color:lightgreen;">Apply</th>
+        <th style="background-color:whitesmoke;">Delete</th>
+    </tr>
+    
+    <tr th:each="job : ${jobs}">
+        <td th:text="${job.jobTitle}"></td>
+        <td th:text="${job.jobDesc}"></td>
+        <td th:text="${job.numberPeopleToHire}"></td>
+        <td th:text="${job.lastApplicationDate}"></td>
+        <td><a th:href="@{/job/} + ${job.id}" target="_blank">Apply</a></td>
+        <td sec:authorize="isAuthenticated()">
+        <form th:action="@{/job/} + ${job.id}" th:method="delete">
+            <button type="submit">Delete</button>
+        </form></td>
+    </tr>
+</table>
+</body>
+</html>

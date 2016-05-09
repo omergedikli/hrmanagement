@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Detail</title>
+</head>
+<body>
+    <nav role="navigation">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/job">Jobs</a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/application">Application List</a></li>      
+            
+        </ul>
+    </nav>
+
+       <div th:each="entry : ${app}">
+       	     <p>Name:<strong th:text="${entry.name}"></strong></p>
+       	     <p>E-Mail:<strong th:text="${entry.email}"></strong></p>
+       	     <p>Phone:<strong th:text="${entry.phone}"></strong></p>
+       	     <p>Address:<strong th:text="${entry.address}"></strong></p>
+       	     <p>Thoughts:<strong th:text="${entry.thoughts}"></strong></p>
+       </div>
+
+     
+
+</body>
+</html>
